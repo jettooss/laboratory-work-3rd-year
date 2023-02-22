@@ -4,7 +4,7 @@
 #include <algorithm>
 
 
-
+#include <deque>
 #include "Header.h"
 int main()
 {
@@ -26,7 +26,18 @@ int main()
         cout << i << " ";
 
     }
+    deque<int>  deq;
+    move(
+        begin(vec),
+        end(vec),
+        back_inserter(deq)
+    );
+    cout << endl;
+ 
     s.vectors(vec);
     s.lists(vec);
-}
+    
 
+    s.deque(deq);
+    s.Array();
+}
