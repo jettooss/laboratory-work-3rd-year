@@ -6,6 +6,15 @@ import xml.etree.cElementTree as ET
 import xml.dom.minidom as minidom
 
 import xml.etree.ElementTree as xml
+import json
+
+
+data = [["1", "Moscow ", "Khabarovsk ", "8 ", '9 ',"CY-23"], ["2", "Moscow ", "Khabarovsk ", "8 ", '9 ',"CY-23"],
+                     ["3", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_106"], ["4", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_1206"],
+                     ["6", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_1206"], ["4", "Moscow ", "Khabarovsk ", "8 ", '9 ',"BB2689"],
+                     ["6", "Moscow ", "Khabarovsk ", "8 ", '3 ',"BB689"]]
+
+
 
 class XML:
  def __init__(self):
@@ -13,7 +22,9 @@ class XML:
                      ["3", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_106"], ["4", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_1206"],
                      ["6", "Moscow ", "Khabarovsk ", "8 ", '9 ',"TY_1206"], ["4", "Moscow ", "Khabarovsk ", "8 ", '9 ',"BB2689"],
                      ["6", "Moscow ", "Khabarovsk ", "8 ", '3 ',"BB689"]]
-        self.url="appct1.xml"
+        self.url="appct9.xml"
+ def dsd(self):
+     return self.data
  def createXML(self):
     root = xml.Element("scoreboard")
 
@@ -40,7 +51,6 @@ class XML:
         with open(self.url, "wb") as fh:
                 tree.write(fh)
 
-
  def deserialization(self):
 
     tree = ET.parse(self.url)
@@ -57,11 +67,43 @@ class XML:
         print(root[i][0].text,root[i][1].text,root[i][2].text,root[i][3].text,root[i][4].text,root[i][5].text)
 
 
+# if __name__ == "__main__":
+#     x = XML().createXML()
+#     x = XML().deserialization()
 
 
 
-if __name__ == "__main__":
-  
 
-    x = XML().createXML()
-    x = XML().deserialization()
+
+import json
+from collections import namedtuple
+from json import JSONEncoder
+
+class flights:
+    def __init__(self, rollNumber, name, froms,where,landing,arrival):
+        self.rollNumber, self.name, self.froms,self.where ,self.landing ,self.arrival= rollNumber, name, froms,where,landing,arrival
+
+
+class StudentEncoder(JSONEncoder):
+        def default(self, o):
+            return o.__dict__
+
+def customStudentDecoder(studentDict):
+    return namedtuple('X', studentDict.keys())(*studentDict.values())
+
+s1=[]
+for i in data:
+    print(i)
+    a=flights(i[0], i[1], i[2], i[3],i[4],i[5])
+    s1.append(a)
+
+
+
+studentJson = json.dumps(s1, indent=4, cls=StudentEncoder)
+print("Student JSON")
+print(studentJson)
+
+studObj = json.loads(studentJson, object_hook=customStudentDecoder)
+
+for i in studObj:
+    print(i[0],i[1],i[2],i[2],i[3],i[4],i[5])

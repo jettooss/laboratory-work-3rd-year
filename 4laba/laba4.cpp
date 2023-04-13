@@ -49,7 +49,7 @@ public:
    void Transformation_standard(const Date& date)
    {
 
-       cout << date.month;
+       //cout << date.month;
     if (date.year == 0 || date.month == 0 || date.day == 0)
     {
         throw invalid_argument("Ни одно значение не может быть равно 0!");
@@ -75,7 +75,7 @@ public:
    }
     bool is_leap_year(int y)
     {
-        cout << y << endl;;
+        //cout << y << endl;;
         if (y % 400 == 0) return true;
         if (y % 100 == 0) return false;
         if (y % 4 == 0)   return true;
@@ -87,9 +87,7 @@ public:
        
         int days = 0;
         bool leap = is_leap_year(y);
-        cout << leap << endl;;
         days += SMonth[leap][m - 1];
-        //cout << days<< endl;;
         return days;
     }
     int leap_years(int year)
@@ -99,20 +97,29 @@ public:
         return (years / 4 - years / 100 + years / 400);
     }
     int calc_days(const Date& date)
+
+
     {
+
         int l_y = leap_years(date.year);
         int nl_y = date.year - 1 - l_y;
+
         return date.day + days_by_monthes(date.month, date.year) + l_y * 366 + nl_y * 365;
     }
 };
   int main()
     {
         setlocale(LC_ALL, "Russian");
-        Date begin{ 2,-1,999 };
-        Date end{ 11,2,1002 };
+        Date begin;
+        cin >> begin.day;
+        cin >> begin.month;
+        cin >> begin.year;
 
-      /*   Date begin{10,12,2020};
-         Date end{11,12,2020};*/
+        Date end;
+        cin >> end.day;
+        cin >> end.month;
+        cin >> end.year;
+     
         Time s;
        
             cout << "Функция с пользовательскими исключениями" << endl;
@@ -135,7 +142,7 @@ public:
           }
           catch (const invalid_argument& error)
           {
-            cout << "Недействительный аргумент: " << error.what() << endl;
+            cout << "Недействительный аргумеЭнт: " << error.what() << endl;
           }
                 
         }
