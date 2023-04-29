@@ -1,5 +1,4 @@
-﻿
-#include <iostream>
+﻿#include <iostream>
 #include <mutex>
 #include <thread>
 #include <vector>
@@ -39,7 +38,6 @@ for (int i = 0; i < 5; ++i)
     cout << endl;
  }
 cout << " id = :" << this_thread::get_id()<< endl;
-        //std::this_thread::sleep_for(std::chrono::milliseconds(1));
 };
 void fun3(int i)
 {
@@ -71,7 +69,7 @@ void fun5(int i)
 int main() {
     setlocale(LC_ALL, "Russian");
    
-    //threads.emplace_back(move(thr));
+
     thread thr1(fun2, 'd');
 
     thread thr3(fun2, 'a');
@@ -82,7 +80,6 @@ int main() {
     thread thr(thread_proc, 8);
     thread thr8(fun5, c);
     thread thr9(fun5, c);
-    //threads.emplace_back(move(thr));
     thr.join();
     thr1.join();
     thr3.join();
@@ -94,65 +91,7 @@ int main() {
     thr9.join();
 
 
-       /* for (auto& thr : threads) {
-            thr.join();
-        };*/
-
-
     return 0;
 }
 
 
-
-
-
-//class container
-//{
-//    std::mutex _lock;
-//    std::vector<T> _elements;
-//public:
-//    void add(T element)
-//    {
-//        _lock.lock();
-//        _elements.push_back(element);
-//        _lock.unlock();
-//    }
-//    void addrange(int num, ...)
-//    {
-//        va_list arguments;
-//        va_start(arguments, num);
-//        for (int i = 0; i < num; i++)
-//        {
-//            _lock.lock();
-//            add(va_arg(arguments, T));
-//            _lock.unlock();
-//        }
-//        va_end(arguments);
-//    }
-//    void dump()
-//    {
-//        _lock.lock();
-//        for (auto e : _elements)
-//            std::cout << e << std::endl;
-//        _lock.unlock();
-//    }
-//};
-//
-//void threadFunction(container<int>& c)
-//{
-//    c.addrange(3, rand(), rand(), rand());
-//}
-//
-//int main()
-//{
-//    srand((unsigned int)time(0));
-//    container<int> cntr;
-//    std::thread t1(threadFunction, std::ref(cntr));
-//    std::thread t2(threadFunction, std::ref(cntr));
-//    std::thread t3(threadFunction, std::ref(cntr));
-//    t1.join();
-//    t2.join();
-//    t3.join();
-//    cntr.dump();
-//    return 0;
-//}

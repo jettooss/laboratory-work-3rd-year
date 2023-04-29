@@ -67,9 +67,9 @@ class XML:
         print(root[i][0].text,root[i][1].text,root[i][2].text,root[i][3].text,root[i][4].text,root[i][5].text)
 
 
-# if __name__ == "__main__":
-#     x = XML().createXML()
-#     x = XML().deserialization()
+if __name__ == "__main__":
+    x = XML().createXML()
+    x = XML().deserialization()
 
 
 
